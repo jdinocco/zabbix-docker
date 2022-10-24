@@ -9,15 +9,16 @@ networks:
       driver: default
       config:
       - subnet: 172.16.60.0/24
-      
+
+services:      
   grafana:
-    container_name: grafana-${COMPOSE_PROJECT_NAME}
+    container_name: grafana-${GRAFANA_VERSION}
     image: grafana/grafana:${GRAFANA_VERSION}
     networks:
       - network-zabbix
     restart: always
     ports:
-      - "3000:3000"
+      - ${EXPOSE_PORT}:3000
     environment:
       - GF_INSTALL_PLUGINS=alexanderzobnin-zabbix-app
       - GRAFANA_VERSION=latest
