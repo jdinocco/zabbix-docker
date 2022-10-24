@@ -1,0 +1,23 @@
+version: "3.1"
+
+networks:
+  network-zabbix:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.60.0/24
+      
+  grafana:
+    container_name: grafana-${COMPOSE_PROJECT_NAME}
+    image: grafana/grafana:${GRAFANA_VERSION}
+    networks:
+      - network-zabbix
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_INSTALL_PLUGINS=alexanderzobnin-zabbix-app
+      - GRAFANA_VERSION=latest
