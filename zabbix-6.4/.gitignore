@@ -1,4 +1,6 @@
 postgres-data/
 zabbix/
 
-!zabbix/config/zabbix-server.conf
+!zabbix-server.conf
+
+!*/
